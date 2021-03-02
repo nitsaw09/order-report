@@ -1,0 +1,16 @@
+{
+  "name": "order-report",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ingest": "node scripts/ingest-file.js",
+    "summary": "node scripts/summary.js",
+    "generate_report": "node scripts/generate_report.js"
+  },
+  "author": "Nitesh",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx": "^0.16.9"
+  }
+}
