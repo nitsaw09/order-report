@@ -6,11 +6,31 @@
   "scripts": {
     "ingest": "node scripts/ingest-file.js",
     "summary": "node scripts/summary.js",
-    "generate_report": "node scripts/generate_report.js"
+    "generate_report": "node scripts/generate_report.js",
+    "test": "jest --coverage"
   },
   "author": "Nitesh",
   "license": "ISC",
   "dependencies": {
     "xlsx": "^0.16.9"
+  },
+  "devDependencies": {
+    "jest": "^25.5.4"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/coverage/**"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
