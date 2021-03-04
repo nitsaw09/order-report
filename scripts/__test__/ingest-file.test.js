@@ -22,14 +22,16 @@ const args = [
 ];
 
 describe('Ingest the file', () => {
-    global.console = {
-        log: jest.fn()
-    }
+    beforeEach(() => {
+        jest.resetModules();
+        global.console = {
+            log: jest.fn()
+        }
+    });
 
     args.forEach(({cmd, desc, res}) => {
         describe(desc, () => {
             beforeEach(() => {
-                jest.resetModules();
                 process.argv = cmd;
                 require("../ingest-file");
             });

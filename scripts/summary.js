@@ -12,7 +12,7 @@ const summary = () => {
             throw new Error(`${3 - args.length} argument is missing`);
         }
 
-        const data = parseXlsx();
+        const data = parseXlsx("./input/report.xlsx");
         result = data.reduce((product, item) => {
             const monthYear = `${year}-${month}`;
             const units = item[`${monthYear} Units`];

@@ -17,7 +17,7 @@ const writeToCSVFile = () => {
   
 const fetchData = () => {
     try {
-        const data = parseXlsx();
+        const data = parseXlsx("./input/report.xlsx");
         let header = ["Year, Month, SKU, Category, Units, Gross Sales"];
         let rows = [];
         let rIndex = 0;

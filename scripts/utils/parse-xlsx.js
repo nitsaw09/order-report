@@ -1,9 +1,9 @@
 const reader = require("xlsx");
 
-const parseXlsx = () => {
+const parseXlsx = (filePath) => {
     try {
         let data = [];
-        const file = reader.readFile("./input/report.xlsx");
+        const file = reader.readFile(filePath);
         const sheets = file.SheetNames;
 
         // loop through the number sheets attached to xlsx
