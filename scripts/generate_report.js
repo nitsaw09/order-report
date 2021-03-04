@@ -4,8 +4,8 @@ const args = process.argv.slice(2);
 
 const writeToCSVFile = () => {
     try {
-        if(args.length < 1) {
-            throw new Error(`1 argument is missing`);
+        if(args.length < 1 || !args[0].includes(".csv")) {
+            throw new Error(`Please pass a argument in valid file name in csv format`);
         }
         const filename = args[0];
         const data = fetchData();
