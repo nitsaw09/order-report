@@ -1,5 +1,5 @@
-const fs = require('fs');
 const parseXlsx = require('./utils/parse-xlsx');
+const writeCsv = require('./utils/write-csv');
 const args = process.argv.slice(2);
 
 const writeToCSVFile = () => {
@@ -9,13 +9,7 @@ const writeToCSVFile = () => {
         }
         const filename = args[0];
         const data = fetchData();
-        fs.writeFile(filename, data, err => {
-            if (err) {
-                console.log(`Error: ${error.message}`);
-            } else {
-                console.log(`saved as ${filename}`);
-            }
-        });
+        writeCsv(filename, data);
     } catch (error) {
         console.log(`Error: ${error.message}`);
     }
@@ -24,12 +18,43 @@ const writeToCSVFile = () => {
 const fetchData = () => {
     try {
         const data = parseXlsx();
-        let header = [];
+        let header = ["Year, Month, SKU, Category, Units, Gross Sales"];
         let rows = [];
+        let rIndex = 0;
         if(data.length > 0) {
-            const getHeaders = Object.keys(data[0]).join(",");
-            header.push(getHeaders);
-            rows = data.map(d => Object.values(d).join(","));
+            let monthYear;
+            let month;
+            let year;
+            let sku;
+            let category;
+            let units;
+            let grossSales;
+            data.forEach(d => { 
+                for (const obj in d) {
+                    if(obj.includes("Units") || obj.includes("Gross Sales")) {
+                        const mYear = obj.split(" ")[0];
+                        const sType = obj.split(" ")[1]
+                        if(units && grossSales && monthYear !== mYear) {
+                            monthYear = mYear;
+                            rows[rIndex] = [`${year},${month},${sku},${category},${units},${grossSales}`];
+                            rIndex++;
+                        }
+                        if(sType === "Units") {
+                            units = d[obj];
+                        } else {
+                            grossSales = d[obj];
+                        }
+                        month = mYear.split("-")[0];
+                        year = mYear.split("-")[1];
+                    } 
+                    if(obj.includes("SKU")) {
+                        sku = d[obj];
+                    }
+                    if(obj.includes("Section")) {
+                        category = d[obj];
+                    }
+                }
+            });
         }
         return header.concat(rows).join("\n");
     } catch(error) {
