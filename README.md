@@ -16,3 +16,8 @@
 1. ```xlsx``` - this package is used to parse the xlsx file data
 2. ```jest``` - this package is used to create & run unit test
 3. ```node-localstorage``` - this package is used to store data in localStorage
+
+## Task Done
+1. ingest file & done unit testing
+2. get summary of ingested file for xlsx & done unit testing
+3. generate report of sales in csv form xlsx file
