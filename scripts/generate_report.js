@@ -1,6 +1,7 @@
 const parseXlsx = require('./utils/parse-xlsx');
 const writeCsv = require('./utils/write-csv');
 const args = process.argv.slice(2);
+const localStorage = require("./utils/local-storage");
 
 const writeToCSVFile = () => {
     try {
@@ -17,7 +18,8 @@ const writeToCSVFile = () => {
   
 const fetchData = () => {
     try {
-        const data = parseXlsx("./input/report.xlsx");
+        const file = localStorage.getItem("fileName");
+        const data = parseXlsx(file);
         let header = ["Year, Month, SKU, Category, Units, Gross Sales"];
         let rows = [];
         let rIndex = 0;

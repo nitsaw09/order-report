@@ -1,3 +1,5 @@
+const localStorage = require("../utils/local-storage");
+
 describe("Summary", () => {
   beforeEach(() => {
     jest.resetModules();
@@ -17,6 +19,7 @@ describe("Summary", () => {
 
   describe("Pass all arguments", () => {
     beforeEach(() => {
+      localStorage.setItem("fileName", "./input/report.xlsx");
       process.argv = ["node", "jest", "Produce", "2018", "11"];
       require("../summary");
     });

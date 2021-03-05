@@ -1,7 +1,12 @@
 const reader = require("xlsx");
+const path = require("path");
 
 const parseXlsx = (filePath) => {
     try {
+        const ext = path.extname(filePath);
+        if(ext !== ".xlsx") {
+            throw new Error("File format is not valid");
+        }
         let data = [];
         const file = reader.readFile(filePath);
         const sheets = file.SheetNames;

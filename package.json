@@ -12,6 +12,7 @@
   "author": "Nitesh",
   "license": "ISC",
   "dependencies": {
+    "node-localstorage": "^2.1.6",
     "xlsx": "^0.16.9"
   },
   "devDependencies": {

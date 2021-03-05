@@ -1,5 +1,6 @@
 const parseXlsx = require("./utils/parse-xlsx");
 const args = process.argv.slice(2);
+const localStorage = require("./utils/local-storage");
 
 const summary = () => {
     let result;
@@ -11,8 +12,8 @@ const summary = () => {
         if(args.length < 3) {
             throw new Error(`${3 - args.length} argument is missing`);
         }
-
-        const data = parseXlsx("./input/report.xlsx");
+        const file = localStorage.getItem("fileName");
+        const data = parseXlsx(file);
         result = data.reduce((product, item) => {
             const monthYear = `${year}-${month}`;
             const units = item[`${monthYear} Units`];

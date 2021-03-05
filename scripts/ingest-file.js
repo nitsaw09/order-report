@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const args = process.argv.slice(2);
+const localStorage = require("./utils/local-storage");
 
 const ingestFile = () => {
     try {
@@ -9,6 +10,7 @@ const ingestFile = () => {
         }
         const file = args[0];
         if (fs.existsSync(file)) {
+            localStorage.setItem("fileName", file);
             const ext = path.extname(file);
             const response = ext === ".xlsx" ? "Success" : "Error";
             console.log(response);

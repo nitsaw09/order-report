@@ -17,11 +17,18 @@ describe("Parse xlsx file", () => {
    });
 
    describe("Throw error", () => {       
-      it("should throw error", () => {
+      it("should throw error on incorrect file format", () => {
         try {
-            parseXlsx();
+          parseXlsx("./input/report.txt");
         } catch(e) {
-            expect(e.message).toMatch("The \"path\" argument must be of type string");
+          expect(e.message).toMatch("File format is not valid");
+        }
+      });
+      it("should throw error for incorrect path", () => {
+        try {
+          parseXlsx();
+        } catch(e) {
+          expect(e.message).toMatch("The \"path\" argument must be of type string");
         }
       });
   });
